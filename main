@@ -1,0 +1,71 @@
+/** Color Me Calm!
+I have created a 9x9 grid, where each cell randomly generates a number
+between 0 and 4 every time the code is run. The user is encouraged to 
+color in the grid corresponding to each other. Meaning, pick a color for 
+2 and color all of the cells with 2 in it that color! The user can change
+colors by pressing down on any key - these colors are randomly generated 
+as well! Once the user colors in all of the boxes, they will be left with 
+a beautiful mosaic!
+**/
+
+// gives the backdrop for the mosaic
+void setup() {
+	// size and color of backdrop or canvas for the mosaic
+	size(676, 676);
+	background(360);
+	
+	// the grid starts at the sides to ensure no blankspace
+	int col = 0;
+	int row = 0;
+	
+	// ensure that the grids are spaced evenly
+	int gridSpace = 75; 
+	
+	// draws the columns of the grid
+  while(col <= width){
+    line(col, 0, col, height);
+    col = col + gridSpace;
+  }
+  // draws the rows of the grid
+  while(row <= height){
+    line(0, row, width, row);
+    row = row + gridSpace;
+  }
+	
+	// set the text font and size
+	font = createFont("Arial", 70, true); 
+	textFont(font);
+	
+	// sets the color of the text
+	fill(0);
+	
+	int colWidth = 20;
+	// here we go through each cell in the grid and fill it with a number
+	for(int row = 0; row < 9; row++){
+		int rowHeight = 65;
+		for(int col = 0; col < 9; col++){
+			// generates a random number between 0-4
+			String randomNumber = String(int(random(0,5)));
+  		text(randomNumber, colWidth,rowHeight);
+			rowHeight = rowHeight + 75;
+		}
+		colWidth = colWidth + 75;
+	}
+}
+
+// enables the users to draw and color on the mosiac
+// also enables the user to choose different colors
+void draw() {
+	// allows users to draw lines and color
+	strokeWeight(10);
+  if (mousePressed == true) {
+    line(mouseX, mouseY, pmouseX, pmouseY);
+  }
+	// pressing down enables users to change the color of their drawing
+	// generates a random color each time
+	if (keyPressed) {
+			stroke(random(255),random(255),random(255));
+	}
+}
+
+
